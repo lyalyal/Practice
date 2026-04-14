@@ -1,17 +1,31 @@
-import { Controller, Get, Post, Body } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Param,
+  Delete,
+  ParseIntPipe,
+} from '@nestjs/common';
 import { GenresService } from './genres.service';
+import { CreateGenreDto } from './dto/create-genre.dto';
 
 @Controller('genres')
 export class GenresController {
   constructor(private readonly genresService: GenresService) {}
 
   @Get()
-  getAllGenres() {
+  getAll() {
     return this.genresService.findAll();
   }
 
   @Post()
-  createGenre(@Body() body: any) {
-    return this.genresService.create(body);
+  create(@Body() dto: CreateGenreDto) {
+    return this.genresService.create(dto);
+  }
+
+  @Delete(':id')
+  delete(@Param('id', ParseIntPipe) id: number) {
+    return this.genresService.remove(id);
   }
 }
