@@ -13,21 +13,24 @@ export default function BookListPage() {
 
   return (
     <div>
-      <h1>Books</h1>
+      <h1>Книжкова поличка</h1>
 
       {books.map((b) => (
         <div key={b.id}>
           <b>{b.title}</b> — {b.author} ({b.status})
           <br />
-          <Link to={`/book/${b.id}/edit`}>Edit</Link>
+          <Link to={`/book/${b.id}/edit`}>Редагувати</Link>
           <button
             onClick={() => {
               deleteBook(b.id);
               load();
             }}
           >
-            Delete
+            Видалити
           </button>
+          <Link to="/book/new">
+            <button>Додати книгу</button>
+          </Link>
         </div>
       ))}
     </div>

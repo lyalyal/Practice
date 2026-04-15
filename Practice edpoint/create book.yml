@@ -1,0 +1,29 @@
+info:
+  name: create book
+  type: http
+  seq: 5
+
+http:
+  method: POST
+  url: http://localhost:3000/book
+  body:
+    type: json
+    data: |-
+      {
+        "title": "Воно",
+        "author": "Стівен Кінг",
+        "pages": 1138,
+        "publishedYear": 1986,
+        "rating": 5,
+        "status": "reading",
+        "startDate": "2026-04-14",
+        "genreId": 1776171604224
+        
+      }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

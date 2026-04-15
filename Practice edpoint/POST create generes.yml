@@ -1,0 +1,21 @@
+info:
+  name: POST create generes
+  type: http
+  seq: 4
+
+http:
+  method: POST
+  url: http://localhost:3000/genres
+  body:
+    type: json
+    data: |-
+      {
+        "name":"Fantasy"
+      }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

@@ -14,10 +14,10 @@ export default function DashboardPage() {
 
   return (
     <div>
-      <h1>Dashboard</h1>
-      <p>Total books: {books.length}</p>
-      <p>Books finished: {finished}</p>
-      <p>Total pages: {totalPages}</p>
+      <h1>Усе про книги</h1>
+      <p>Всі книги: {books.length}</p>
+      <p>Прочитано: {finished}</p>
+      <p>Загально сторінок: {totalPages}</p>
     </div>
   );
 }
