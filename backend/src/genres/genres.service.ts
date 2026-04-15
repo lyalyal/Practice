@@ -4,7 +4,16 @@ import { CreateGenreDto } from './dto/create-genre.dto';
 
 @Injectable()
 export class GenresService {
-  private genres: Genre[] = [];
+  private genres: Genre[] = [
+    { id: 1, name: 'Фантастика' },
+    { id: 2, name: 'Детектив' },
+    { id: 3, name: 'Роман' },
+    { id: 4, name: 'Історія' },
+    { id: 5, name: 'Автобіографія' },
+    { id: 6, name: 'Класика' },
+    { id: 7, name: 'Психологія' },
+    { id: 8, name: 'Комікс' },
+  ];
 
   findAll(): Genre[] {
     return this.genres;
@@ -12,7 +21,7 @@ export class GenresService {
 
   create(dto: CreateGenreDto): Genre {
     const newGenre: Genre = {
-      id: Date.now(),
+      id: this.genres.length + 1,
       ...dto,
     };
     this.genres.push(newGenre);
