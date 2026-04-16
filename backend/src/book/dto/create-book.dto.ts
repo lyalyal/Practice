@@ -6,6 +6,7 @@ import {
   IsNotEmpty,
   Min,
   Max,
+  ValidateIf,
 } from 'class-validator';
 import type { BookStatus } from '../entities/book.entity';
 
@@ -28,7 +29,8 @@ export class CreateBookDto {
   })
   publishedYear!: number;
   @IsOptional()
-  @IsNumber()
+  @IsNumber({}, { message: 'Оцінка має бути числом' })
+  @ValidateIf((o) => o.status === 'done')
   @Min(1)
   @Max(5, { message: 'Оцінка має бути від 1 до 5' })
   rating?: number;
