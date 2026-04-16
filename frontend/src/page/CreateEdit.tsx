@@ -101,7 +101,7 @@ export default function CreateEditPage() {
       <input type="number" {...register("publishedYear")} />
       <p className="error">{errors.publishedYear?.message}</p>
 
-      <label>Оцінка (тільки якщо прочитано)</label>
+      <label>Оцінка</label>
       <input type="number" {...register("rating")} />
       <p className="error">{errors.rating?.message}</p>
 
