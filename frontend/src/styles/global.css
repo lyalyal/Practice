@@ -1,0 +1,202 @@
+/* =========================================
+   ПАЛІТРА ТА ГЛОБАЛЬНІ СТИЛІ
+   ========================================= */
+body {
+  margin: 0;
+  font-family: "Times New Roman", serif;
+  background: #ede8e7; /* Stone */
+  color: #674b36; /* Pecan */
+}
+
+/* =========================================
+   СТАТИСТИКА (Dashboard)
+   ========================================= */
+.dashboard {
+  text-align: center;
+  padding: 40px 20px;
+}
+
+.stats-row {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  margin: 30px 0;
+  flex-wrap: wrap;
+}
+
+.stat-card {
+  background: #674b36; /* Pecan */
+  color: #ede8e7; /* Stone */
+  padding: 20px 30px;
+  border-radius: 18px;
+  width: 160px;
+  box-sizing: border-box;
+  box-shadow: 0 4px 10px rgba(103, 75, 54, 0.15);
+}
+
+.stat-card h3 {
+  margin: 0;
+  font-size: 16px;
+  font-weight: normal;
+}
+
+.stat-card p {
+  font-size: 32px;
+  margin: 10px 0 0;
+  font-weight: bold;
+}
+
+/* Віджет "Остання книга" на сторінці статистики */
+.last-book-widget {
+  background: #ffffff;
+  padding: 20px;
+  border-radius: 18px;
+  width: 300px;
+  margin: 20px auto;
+  border: 2px solid #d5dce4; /* Powder */
+  color: #674b36;
+  text-align: left;
+}
+
+.last-book-widget h3 {
+  margin: 0 0 5px 0;
+}
+
+.last-book-widget p {
+  margin: 0;
+  font-size: 14px;
+}
+
+/* =========================================
+   УНІВЕРСАЛЬНИЙ ПОШУК
+   ========================================= */
+.search-input,
+.search {
+  padding: 14px 18px;
+  border-radius: 20px;
+  border: 2px solid #c7ae97; /* Peanut */
+  width: 100%;
+  max-width: 420px;
+  margin: 15px auto 25px auto;
+  background: #d5dce4; /* Powder */
+  color: #674b36; /* Pecan */
+  font-size: 16px;
+  font-family: inherit;
+  display: block;
+  box-sizing: border-box;
+}
+
+.search-input:focus,
+.search:focus {
+  outline: none;
+  border-color: #674b36;
+}
+
+/* =========================================
+   ФОРМА (Створення/Редагування)
+   ========================================= */
+.form {
+  background: #ffffff;
+  padding: 30px;
+  border-radius: 20px;
+  width: 420px;
+  margin: 40px auto;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  border: 2px solid #d5dce4; /* Powder */
+  box-shadow: 0 4px 12px rgba(103, 75, 54, 0.1);
+}
+
+.form input,
+.form select {
+  padding: 10px;
+  border-radius: 10px;
+  border: 1px solid #c7ae97; /* Peanut */
+  background: #ede8e7; /* Stone */
+  color: #674b36;
+  font-family: inherit;
+}
+
+.mainBtn {
+  margin-top: 15px;
+  padding: 12px;
+  border: none;
+  border-radius: 14px;
+  background: #674b36; /* Pecan */
+  color: #ede8e7; /* Stone */
+  font-weight: bold;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.error {
+  color: #c0392b;
+  font-size: 12px;
+  margin: 0;
+  margin-top: -6px;
+}
+
+/* =========================================
+   КНИЖКОВА ПОЛИЧКА (Список книг)
+   ========================================= */
+.books-page {
+  text-align: center;
+  padding: 0 40px 40px 40px;
+}
+
+.empty-text {
+  margin-top: 30px;
+  font-size: 18px;
+  color: #674b36;
+}
+
+.books-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 25px;
+  padding: 20px 0;
+}
+
+.book-card {
+  background: #ffffff;
+  padding: 20px;
+  border-radius: 18px;
+  text-align: left;
+  border: 2px solid #d5dce4; /* Powder */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.book-card h3 {
+  margin: 0 0 10px 0;
+  color: #674b36;
+}
+
+.book-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.edit-btn,
+.delete-btn {
+  flex: 1;
+  font-weight: bold;
+  border: none;
+  padding: 10px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.edit-btn {
+  background: #d5dce4; /* Powder */
+  color: #674b36;
+}
+
+.delete-btn {
+  background: #c7ae97; /* Peanut */
+  color: #ffffff;
+}

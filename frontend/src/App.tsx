@@ -8,13 +8,17 @@ function App() {
   return (
     <>
       <Navbar />
-      <Routes>
-        <Route path="/" element={<DashboardPage />} />
-        <Route path="/book" element={<BookListPage />} />
-        <Route path="/book/new" element={<CreateEditPage />} />
-        <Route path="/book/:id/edit" element={<CreateEditPage />} />
-      </Routes>
+
+      <div className="app-container">
+        <Routes>
+          <Route path="/" element={<BookListPage />} />
+          <Route path="/dashboard" element={<DashboardPage />} />
+          <Route path="/book/new" element={<CreateEditPage />} />
+          <Route path="/book/:id/edit" element={<CreateEditPage />} />
+        </Routes>
+      </div>
     </>
   );
 }
+
 export default App;

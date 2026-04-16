@@ -1,0 +1,37 @@
+.navbar {
+  background: #c7ae97; /* Peanut */
+  padding: 18px 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  margin: 0;
+  color: #ffffff;
+  font-weight: bold;
+}
+
+.nav-links {
+  display: flex;
+  gap: 25px;
+  align-items: center;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: #ffffff;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.add-btn {
+  background: #d5dce4; /* Powder */
+  color: #674b36 !important; /* Pecan */
+  padding: 8px 16px;
+  border-radius: 14px;
+  font-weight: bold;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+}

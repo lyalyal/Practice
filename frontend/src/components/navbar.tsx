@@ -1,11 +1,18 @@
 import { Link } from "react-router-dom";
+import "../styles/navbar.css";
 
 export default function Navbar() {
   return (
-    <nav style={{ display: "flex", gap: 20, padding: 20 }}>
-      <Link to="/">Усе про книги</Link>
-      <Link to="/book">Книжкова поличка</Link>
-      <Link to="/book/new">Додати книгу</Link>
+    <nav className="navbar">
+      <h2 className="logo"> Читацький щоденник</h2>
+
+      <div className="nav-links">
+        <Link to="/">Усі книги</Link>
+        <Link to="/dashboard">Статистика</Link>
+        <Link to="/book/new" className="add-btn">
+          + Додати книгу
+        </Link>
+      </div>
     </nav>
   );
 }

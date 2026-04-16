@@ -9,50 +9,43 @@ import { useEffect, useState } from "react";
 const schema = z
   .object({
     title: z.string().min(1, "Введіть назву книги"),
-
     author: z.string().min(1, "Введіть автора"),
 
-    pages: z.coerce
-      .number()
-      .refine((val) => !isNaN(val), {
-        message: "Введіть число",
-      })
-      .min(1, "Кількість сторінок має бути більше 0"),
+    pages: z.coerce.number().min(1, "Введіть кількість сторінок"),
+    publishedYear: z.coerce.number(),
+    genreId: z.coerce.number(),
 
-    publishedYear: z.coerce
-      .number()
-      .refine((val) => !isNaN(val), {
-        message: "Введіть число",
-      })
-      .min(1200, "Рік має бути не менше 1200"),
+    status: z.enum(["plan", "reading", "done"]),
 
-    rating: z.coerce
-      .number()
-      .refine((val) => !isNaN(val), {
-        message: "Оцінка книги",
-      })
-      .min(1, "Мінімально  1")
-      .max(5, "Максимально 5"),
-
-    startDate: z.string().min(1, "Оберіть дату початку читання"),
-
+    startDate: z.string().min(1, "Оберіть дату початку"),
     finishDate: z.string().optional(),
 
-    genreId: z.coerce.number().refine((val) => !isNaN(val), {
-      message: "Оберіть жанр",
-    }),
-
-    status: z.enum(["plan", "reading", "done"], {
-      message: "Оберіть статус книги",
-    }),
+    rating: z.preprocess(
+      (val) => (val === "" ? undefined : Number(val)),
+      z.number().min(1, "Оцінка 1-5").max(5, "Оцінка 1-5"),
+    ),
   })
   .refine(
     (data) => {
-      if (!data.finishDate) return true;
-      return new Date(data.finishDate) >= new Date(data.startDate);
+      if (data.status !== "done") return true;
+      return data.rating !== undefined;
     },
     {
-      message: "Дата завершення не може бути раніше дати початку",
+      message: "Поставте оцінку прочитаній книзі",
+      path: ["rating"],
+    },
+  )
+  .refine(
+    (data) => {
+      if (!data.finishDate) return true;
+
+      const start = new Date(data.startDate);
+      const finish = new Date(data.finishDate);
+
+      return finish >= start;
+    },
+    {
+      message: "Дата завершення не може бути раніше",
       path: ["finishDate"],
     },
   );
@@ -63,11 +56,7 @@ export default function CreateEditPage() {
   const navigate = useNavigate();
   const { id } = useParams();
 
-  type Genre = {
-    id: number;
-    name: string;
-  };
-
+  type Genre = { id: number; name: string };
   const [genres, setGenres] = useState<Genre[]>([]);
 
   const {
@@ -75,9 +64,7 @@ export default function CreateEditPage() {
     handleSubmit,
     reset,
     formState: { errors },
-  } = useForm<FormData>({
-    resolver: zodResolver(schema) as any,
-  });
+  } = useForm<FormData>({ resolver: zodResolver(schema) as any });
 
   useEffect(() => {
     getGenres().then(setGenres);
@@ -85,88 +72,68 @@ export default function CreateEditPage() {
 
   useEffect(() => {
     if (!id) return;
-
-    getBook(Number(id)).then((book) => {
-      reset(book);
-    });
+    getBook(Number(id)).then((book) => reset(book));
   }, [id, reset]);
 
   const onSubmit = async (data: FormData) => {
-    if (id) {
-      await updateBook(Number(id), data);
-    } else {
-      await createBook(data);
-    }
-
-    navigate("/book");
+    if (id) await updateBook(Number(id), data);
+    else await createBook(data);
+    navigate("/");
   };
 
   return (
-    <form
-      onSubmit={handleSubmit(onSubmit)}
-      style={{
-        display: "flex",
-        flexDirection: "column",
-        gap: "12px",
-        maxWidth: "400px",
-        margin: "20px auto",
-      }}
-    >
+    <form onSubmit={handleSubmit(onSubmit)} className="form">
       <h2>{id ? "Редагування книги" : "Додавання книги"}</h2>
 
       <label>Назва книги</label>
       <input {...register("title")} />
-      {errors.title && <p>{errors.title.message}</p>}
+      <p className="error">{errors.title?.message}</p>
 
       <label>Автор</label>
       <input {...register("author")} />
-      {errors.author && <p>{errors.author.message}</p>}
+      <p className="error">{errors.author?.message}</p>
 
       <label>Кількість сторінок</label>
-      <input type="number" {...register("pages", { valueAsNumber: true })} />
-      {errors.pages && <p>{errors.pages.message}</p>}
+      <input type="number" {...register("pages")} />
+      <p className="error">{errors.pages?.message}</p>
 
       <label>Рік видання</label>
-      <input
-        type="number"
-        {...register("publishedYear", { valueAsNumber: true })}
-      />
-      {errors.publishedYear && <p>{errors.publishedYear.message}</p>}
+      <input type="number" {...register("publishedYear")} />
+      <p className="error">{errors.publishedYear?.message}</p>
 
-      <label>Оцінка книги</label>
-      <input type="number" {...register("rating", { valueAsNumber: true })} />
-      {errors.rating && <p>{errors.rating.message}</p>}
+      <label>Оцінка (тільки якщо прочитано)</label>
+      <input type="number" {...register("rating")} />
+      <p className="error">{errors.rating?.message}</p>
 
-      <label>Дата початку читання</label>
+      <label>Дата початку</label>
       <input type="date" {...register("startDate")} />
-      {errors.startDate && <p>{errors.startDate.message}</p>}
+      <p className="error">{errors.startDate?.message}</p>
 
-      <label>Дата завершення читання</label>
+      <label>Дата завершення</label>
       <input type="date" {...register("finishDate")} />
-      {errors.finishDate && <p>{errors.finishDate.message}</p>}
+      <p className="error">{errors.finishDate?.message}</p>
 
       <label>Жанр</label>
-      <select {...register("genreId", { valueAsNumber: true })}>
+      <select {...register("genreId")}>
         <option value="">Оберіть жанр</option>
-
         {genres.map((g) => (
           <option key={g.id} value={g.id}>
             {g.name}
           </option>
         ))}
       </select>
-      {errors.genreId && <p>{errors.genreId.message}</p>}
+      <p className="error">{errors.genreId?.message}</p>
 
-      <label>Статус книги</label>
+      <label>Статус</label>
       <select {...register("status")}>
         <option value="">Оберіть статус</option>
         <option value="plan">Заплановано</option>
         <option value="reading">Читаю</option>
         <option value="done">Прочитано</option>
       </select>
-      {errors.status && <p>{errors.status.message}</p>}
+      <p className="error">{errors.status?.message}</p>
 
-      <button type="submit">{id ? "Зберегти зміни" : "Додати книгу"}</button>
+      <button className="mainBtn">{id ? "Зберегти" : "Додати книгу"}</button>
     </form>
   );
 }
