@@ -10,27 +10,29 @@ export default function DashboardPage() {
     getBooks().then(setBooks);
   }, []);
 
+  const filteredBooks = useMemo(() => {
+    return books.filter((b) =>
+      (b.title + b.author).toLowerCase().includes(search.toLowerCase()),
+    );
+  }, [books, search]);
+
   const stats = useMemo(() => {
-    const totalPages = books.reduce((sum, b) => sum + b.pages, 0);
-    const finishedBooks = books.filter((b) => b.status === "done");
+    const totalPages = filteredBooks.reduce((sum, b) => sum + b.pages, 0);
+    const finishedBooks = filteredBooks.filter((b) => b.status === "done");
 
     const avgRating =
       finishedBooks.reduce((sum, b) => sum + (b.rating || 0), 0) /
       (finishedBooks.length || 1);
 
-    const lastBook = books[books.length - 1];
+    const lastBook = filteredBooks[filteredBooks.length - 1];
 
     return {
-      totalBooks: books.length,
+      totalBooks: filteredBooks.length,
       totalPages,
-      avgRating: avgRating.toFixed(1),
+      avgRating: finishedBooks.length > 0 ? avgRating.toFixed(1) : "0.0",
       lastBook: lastBook?.title || "—",
     };
-  }, [books]);
-
-  const filtered = books.filter((b) =>
-    (b.title + b.author).toLowerCase().includes(search.toLowerCase()),
-  );
+  }, [filteredBooks]);
 
   return (
     <div className="dashboard">
@@ -38,7 +40,7 @@ export default function DashboardPage() {
 
       <input
         className="search-input"
-        placeholder="Пошук книги "
+        placeholder="Пошук книги"
         value={search}
         onChange={(e) => setSearch(e.target.value)}
       />
@@ -58,12 +60,13 @@ export default function DashboardPage() {
           <h3>Середній рейтинг</h3>
           <p>{stats.avgRating}</p>
         </div>
-
-        <div className="stat-card">
-          <h3>Остання книга</h3>
+      </div>
+      {filteredBooks.length > 0 && (
+        <div className="last-book-widget">
+          <h3>Остання книга:</h3>
           <p>{stats.lastBook}</p>
         </div>
-      </div>
+      )}
     </div>
   );
 }

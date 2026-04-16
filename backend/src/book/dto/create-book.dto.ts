@@ -27,11 +27,11 @@ export class CreateBookDto {
     message: 'Книга не може бути видана у майбутньому часі',
   })
   publishedYear!: number;
-
+  @IsOptional()
   @IsNumber()
   @Min(1)
   @Max(5, { message: 'Оцінка має бути від 1 до 5' })
-  rating!: number;
+  rating?: number;
 
   @IsString()
   @IsIn(['plan', 'reading', 'done'], {

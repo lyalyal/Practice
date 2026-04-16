@@ -7,7 +7,7 @@ export class Book {
   pages!: number;
   publishedYear!: number;
   status!: BookStatus;
-  rating!: number;
+  rating?: number;
   startDate!: string;
   finishDate?: string;
   genreId!: number;

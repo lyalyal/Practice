@@ -1,16 +1,10 @@
-/* =========================================
-   ПАЛІТРА ТА ГЛОБАЛЬНІ СТИЛІ
-   ========================================= */
 body {
   margin: 0;
   font-family: "Times New Roman", serif;
-  background: #ede8e7; /* Stone */
-  color: #674b36; /* Pecan */
+  background: #ede8e7;
+  color: #674b36;
 }
 
-/* =========================================
-   СТАТИСТИКА (Dashboard)
-   ========================================= */
 .dashboard {
   text-align: center;
   padding: 40px 20px;
@@ -25,8 +19,8 @@ body {
 }
 
 .stat-card {
-  background: #674b36; /* Pecan */
-  color: #ede8e7; /* Stone */
+  background: #674b36;
+  color: #ede8e7;
   padding: 20px 30px;
   border-radius: 18px;
   width: 160px;
@@ -46,14 +40,13 @@ body {
   font-weight: bold;
 }
 
-/* Віджет "Остання книга" на сторінці статистики */
 .last-book-widget {
   background: #ffffff;
   padding: 20px;
   border-radius: 18px;
   width: 300px;
   margin: 20px auto;
-  border: 2px solid #d5dce4; /* Powder */
+  border: 2px solid #d5dce4;
   color: #674b36;
   text-align: left;
 }
@@ -67,19 +60,16 @@ body {
   font-size: 14px;
 }
 
-/* =========================================
-   УНІВЕРСАЛЬНИЙ ПОШУК
-   ========================================= */
 .search-input,
 .search {
   padding: 14px 18px;
   border-radius: 20px;
-  border: 2px solid #c7ae97; /* Peanut */
+  border: 2px solid #c7ae97;
   width: 100%;
   max-width: 420px;
   margin: 15px auto 25px auto;
-  background: #d5dce4; /* Powder */
-  color: #674b36; /* Pecan */
+  background: #d5dce4;
+  color: #674b36;
   font-size: 16px;
   font-family: inherit;
   display: block;
@@ -92,9 +82,6 @@ body {
   border-color: #674b36;
 }
 
-/* =========================================
-   ФОРМА (Створення/Редагування)
-   ========================================= */
 .form {
   background: #ffffff;
   padding: 30px;
@@ -104,7 +91,7 @@ body {
   display: flex;
   flex-direction: column;
   gap: 12px;
-  border: 2px solid #d5dce4; /* Powder */
+  border: 2px solid #d5dce4;
   box-shadow: 0 4px 12px rgba(103, 75, 54, 0.1);
 }
 
@@ -112,8 +99,8 @@ body {
 .form select {
   padding: 10px;
   border-radius: 10px;
-  border: 1px solid #c7ae97; /* Peanut */
-  background: #ede8e7; /* Stone */
+  border: 1px solid #c7ae97;
+  background: #ede8e7;
   color: #674b36;
   font-family: inherit;
 }
@@ -123,8 +110,8 @@ body {
   padding: 12px;
   border: none;
   border-radius: 14px;
-  background: #674b36; /* Pecan */
-  color: #ede8e7; /* Stone */
+  background: #674b36;
+  color: #ede8e7;
   font-weight: bold;
   font-size: 16px;
   cursor: pointer;
@@ -137,9 +124,6 @@ body {
   margin-top: -6px;
 }
 
-/* =========================================
-   КНИЖКОВА ПОЛИЧКА (Список книг)
-   ========================================= */
 .books-page {
   text-align: center;
   padding: 0 40px 40px 40px;
@@ -163,7 +147,7 @@ body {
   padding: 20px;
   border-radius: 18px;
   text-align: left;
-  border: 2px solid #d5dce4; /* Powder */
+  border: 2px solid #d5dce4;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
   display: flex;
   flex-direction: column;
@@ -192,11 +176,91 @@ body {
 }
 
 .edit-btn {
-  background: #d5dce4; /* Powder */
+  background: #d5dce4;
   color: #674b36;
 }
 
 .delete-btn {
-  background: #c7ae97; /* Peanut */
+  background: #c7ae97;
   color: #ffffff;
+}
+
+@media (min-width: 1400px) {
+  .books-grid {
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 40px;
+  }
+
+  .dashboard,
+  .books-page {
+    max-width: 1300px;
+    margin: 0 auto;
+  }
+
+  .stat-card {
+    width: 220px;
+    padding: 30px;
+  }
+}
+
+@media (max-width: 1024px) {
+  .books-grid {
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 20px;
+  }
+
+  .books-page {
+    padding: 0 20px 20px 20px;
+  }
+}
+
+@media (max-width: 600px) {
+  .navbar {
+    flex-direction: column;
+    padding: 15px;
+    gap: 15px;
+    text-align: center;
+  }
+
+  .nav-links {
+    gap: 15px;
+    font-size: 16px;
+  }
+
+  .stats-row {
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+  }
+
+  .stat-card {
+    width: 100%;
+    max-width: 280px;
+  }
+
+  .form {
+    width: 95%;
+    padding: 20px;
+    box-sizing: border-box;
+  }
+
+  .search-input {
+    width: 90%;
+  }
+
+  h1 {
+    font-size: 24px;
+  }
+}
+
+@media (max-width: 380px) {
+  .nav-links {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .add-btn {
+    width: 100%;
+    text-align: center;
+  }
 }

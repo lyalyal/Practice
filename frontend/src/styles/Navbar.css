@@ -1,5 +1,5 @@
 .navbar {
-  background: #c7ae97; /* Peanut */
+  background: #c7ae97;
   padding: 18px 40px;
   display: flex;
   justify-content: space-between;
@@ -26,8 +26,8 @@
 }
 
 .add-btn {
-  background: #d5dce4; /* Powder */
-  color: #674b36 !important; /* Pecan */
+  background: #d5dce4;
+  color: #674b36 !important;
   padding: 8px 16px;
   border-radius: 14px;
   font-weight: bold;
